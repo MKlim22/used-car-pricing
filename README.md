@@ -196,9 +196,6 @@ These results are consistent with insights from EDA.
 ## Model Persistence
 The final trained pipeline was saved using `joblib`, allowing the model to be reused for future predictions without retraining.
 
-```python
-joblib.dump(best_pipeline, "best_used_car_price_model.joblib")
-
 ## How to run
 1. Clone the repository
 2. Open `used_cars_analysis.ipynb` in Jupyter Notebook
