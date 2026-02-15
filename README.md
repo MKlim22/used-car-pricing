@@ -1,49 +1,40 @@
 # Used Car Price Analysis
 
-## Project overview
-This project focuses on analyzing factors that influence used car prices using Python.
-The goal is to explore relationships between vehicle features (such as engine size, horsepower, body style, and drivetrain) and car prices through data cleaning, exploratory data analysis (EDA), and visualization, and predictive modeling.
+## Project Overview
 
-The dataset comes from the IBM skills Network and contains technical specifications and prices of used cars.
+This project analyzes factors influencing used car prices using Python.  
+The objective is to explore relationships between vehicle characteristics and price through:
+
+- Data cleaning
+- Exploratory Data Analysis (EDA)
+- Feature engineering
+- Predictive modeling
+- Model evaluation and refinement
+
+The dataset comes from IBM Skills Network and contains technical specifications and prices of used cars.
 
 ---
 
 ## Dataset
-- Source: IBM Skills Network
-- Rows: 205
-- Columns: 26
-- Target variable: 'price'
 
-## Key features:
-- Engine size
-- Horsepower
-- Curb weight
-- Body style
-- Drive wheels
-- Fuel efficiency (city & highway MPG)
-
----
-
-## Tools & Libraries
-- Python
-- pandas
-- numpy
-- matplotlib
-- seaborn
-- scikit-learn
-- Jupyter Notebook
+- Source: IBM Skills Network  
+- Rows: 205  
+- Columns: 26  
+- Target variable: `price`
 
 ---
 
 ## Data Cleaning
-The following steps were performed:
+
+The following preprocessing steps were performed:
+
 - Replaced `"?"` values with `NaN`
 - Converted selected columns to numeric types
-- Removed rows with missing `price`
+- Removed rows with missing target (`price`)
 - Filled missing values:
-    - Median for `normalized-looses`
-    - Mean for numerical features (`bore`, `stroke`, `horsepower`, `peak-rpm`)
-    - Mode for `num-of-doors`
+  - Median for `normalized-losses`
+  - Mean for numerical features (`bore`, `stroke`, `horsepower`, `peak-rpm`)
+  - Mode for `num-of-doors`
 - Verified data types and missing values after cleaning
 
 ---
@@ -51,41 +42,25 @@ The following steps were performed:
 ## Exploratory Data Analysis (EDA)
 
 ### Correlation Analysis
-A correlation matrix was created to identify variables most strongly related to price.
 
-Top positive correlations with price:
-- Engine size
-- Curb weight
-- Horsepower
-- Vehicle width
+A correlation matrix was used to identify variables most strongly related to price.
 
-Negative correlations:
-- City MPG
-- Highway MPG
+**Top positive correlations:**
+- Engine size  
+- Curb weight  
+- Horsepower  
+- Vehicle width  
 
----
+**Negative correlations:**
+- City MPG  
+- Highway MPG  
 
-## Visualizations
+### Visualizations
 
-### Engine size vs Price
-A strong positive linear relationship indicates that cars with larger engines tend to be more expensive.
-
-### Horsepower vs Price
-Higher horsepower is generally associated with higher vehicle prices.
-
-### Price vs Drive Wheels
-Rear-wheel drive cars tent to have a higher median price compared to front-wheel drive vehicles.
-
-### Price vs Body Style
-Convertibles and hardtops generally show higher prices, while hatchbacks and wagons are typically more affordable.
-
----
-
-## Key Insights
-- Engine size and horsepower are strong predictors of car price
-- Heavier and wider cars tend to be more expensive
-- Fuel-efficient cars usually have lower price
-- Drivetrain and body style have a noticeable impact on pricing
+- Engine size vs Price (strong positive linear trend)
+- Horsepower vs Price (clear positive relationship)
+- Price vs Drive Wheels (RWD vehicles tend to be more expensive)
+- Price vs Body Style (convertibles and hardtops show higher prices)
 
 ---
 
@@ -93,26 +68,28 @@ Convertibles and hardtops generally show higher prices, while hatchbacks and wag
 
 The modeling phase focused on predicting car prices using both numerical and categorical features.
 
-## Data Preparation
+### Data Preparation
+
 - Target variable: `price`
-- Removed rows with missing target values
 - Train-test split:
-    - 80% training set
-    - 20% test set
+  - 80% training set
+  - 20% test set
 - Automatic separation of:
-    - Numerical features
-    - Categorical features
+  - Numerical features
+  - Categorical features
 
+---
 
-### Preprocessing Pipeline
+## Preprocessing Pipeline
+
 A unified preprocessing pipeline was built using `ColumnTransformer`.
 
-**Numerical features:**
-- Median imputation for missing values
-- Standarization using `StandardScaler`
+### Numerical features:
+- Median imputation
+- Standardization using `StandardScaler`
 
-**Categorical features:**
-- Most frequent value imputation
+### Categorical features:
+- Most frequent imputation
 - One-hot encoding (`handle_unknown="ignore"`)
 
 The same preprocessing steps were applied consistently across all models.
@@ -120,7 +97,9 @@ The same preprocessing steps were applied consistently across all models.
 ---
 
 ## Models Evaluated
+
 The following regression models were trained and compared:
+
 - Linear Regression
 - Ridge Regression (L2 regularization)
 - Lasso Regression (L1 regularization)
@@ -131,50 +110,51 @@ Each model was combined with the preprocessing pipeline using `Pipeline`.
 ---
 
 ## Model Evaluation
-Models were evaluate using:
+
+Models were evaluated using:
+
 - R² score
 - RMSE (Root Mean Squared Error)
 - MAE (Mean Absolute Error)
 
 Evaluation was performed on:
+
 - Training set
 - Test set
 - 5-fold cross-validation
 
-### Test Set Performance (summary)
-- **Random Forest** achieved the highest R² and lowest RMSE
-- Regularized linear models (Ridge, Lasso) performed better than plain Linear Regression
-- Random Forest showed the best overall generalization performance
-
 ---
 
 ## Cross-Validation
+
 5-fold cross-validation was used to assess model stability.
 
-Random Forest:
+Random Forest achieved:
+
 - Highest mean CV R²
 - Lowest mean CV RMSE
 - Relatively low variance across folds
 
-Based on cross-validation results, **Random Forest** was selected as the final model.
-
 ---
 
-## Final Model Performance
-**Best model:** Random Forest Regressor  
+## Final Model Selection
 
-Final evaluation on the test set:
-- R² ≈ 0.93  
-- RMSE ≈ 2978  
-- MAE ≈ 1889  
+Based on cross-validation results, **Random Forest Regressor** was selected as the final model.
 
-This indicates strong predictive performance with a relatively low average prediction error.
+### Final Test Performance
+
+- R² ≈ 0.93
+- RMSE ≈ 2978
+- MAE ≈ 1889
+
+This indicates strong predictive performance with relatively low average prediction error.
 
 ---
 
 ## Diagnostic Analysis
-- **Predicted vs Actual plot** shows good alignment along the diagonal
-- **Residual plot** shows no strong systematic patterns
+
+- Predicted vs Actual plot shows strong alignment along the diagonal
+- Residual plot shows no strong systematic patterns
 - Slightly higher variance is visible for higher-priced vehicles
 
 Overall, residuals suggest a well-fitted model.
@@ -182,7 +162,9 @@ Overall, residuals suggest a well-fitted model.
 ---
 
 ## Feature Importance (Random Forest)
-Feature importance analysis revealed that the most influential features were:
+
+The most influential features were:
+
 - Engine size
 - Horsepower
 - Curb weight
@@ -194,15 +176,38 @@ These results are consistent with insights from EDA.
 ---
 
 ## Model Persistence
-The final trained pipeline was saved using `joblib`, allowing the model to be reused for future predictions without retraining.
 
-## How to run
-1. Clone the repository
-2. Open `used_cars_analysis.ipynb` in Jupyter Notebook
-3. Run all cells sequentially
+The final trained pipeline was saved using `joblib`, allowing reuse without retraining:
 
-## Future improvements
-- Hyperparameter turning for the Random Forest model
-- Testing additional ensemble models (e.g. Gradient Boosting)
-- Feature engineering (interaction terms, binning)
+```python
+joblib.dump(best_pipeline, "best_used_car_price_model.joblib")
+```
+
+---
+
+## Tools & Libraries
+
+- Python  
+- pandas  
+- numpy  
+- matplotlib  
+- seaborn  
+- scikit-learn  
+- Jupyter Notebook  
+
+---
+
+## How to Run
+
+1. Clone the repository  
+2. Open `used_cars_analysis.ipynb`  
+3. Run all cells sequentially  
+
+---
+
+## Future Improvements
+
+- Hyperparameter tuning for Random Forest  
+- Testing additional ensemble models (e.g., Gradient Boosting)  
+- Feature engineering (interaction terms, binning)  
 - Expanding the dataset to improve generalization
