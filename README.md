@@ -219,3 +219,10 @@ joblib.dump(best_pipeline, "best_used_car_price_model.joblib")
 The dashboard below presents key insights from the used car dataset, including price distribution, brand comparison, fuel type analysis, and the relationship between engine size and car price.
 
 ![Dashboard](dashboard/car_price_dashboard.png)
+
+### Key Insights
+
+- Luxury brands such as Jaguar and Mercedes-Benz have the highest average used car prices.
+- Most used cars in the dataset are priced below $15,000.
+- Diesel vehicles tend to have slightly higher average prices than gasoline vehicles.
+- There is a positive relationship between engine size and car price - cars with larger engines are typically more expensive.
