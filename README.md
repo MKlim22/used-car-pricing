@@ -211,3 +211,11 @@ joblib.dump(best_pipeline, "best_used_car_price_model.joblib")
 - Testing additional ensemble models (e.g., Gradient Boosting)  
 - Feature engineering (interaction terms, binning)  
 - Expanding the dataset to improve generalization
+
+---
+
+## Power BI Dashboard
+
+The dashboard below presents key insights from the used car dataset, including price distribution, brand comparison, fuel type analysis, and the relationship between engine size and car price.
+
+![Dashboard](dashboard/car_price_dashboard.png)
